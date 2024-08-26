@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@web3-onboard/core": "^2.22.2",
+    "@web3-onboard/injected-wallets": "^2.11.1",
+    "@web3-onboard/vue": "^2.8.2",
     "ethers": "^6.13.2",
+    "viem": "^2.19.3",
     "vue": "^3.4.35"
   },
   "devDependencies": {
