@@ -1,39 +1,34 @@
 <script setup>
-import { ref } from "vue";
-import { useWebWallet } from "./composables/useWebWallet.js";
-import Token from "./infra/token.js";
-import Logo from "./components/logo.vue";
-
-const { connect } = useWebWallet();
-const wallet = ref(null);
-
-async function handleConnect() {
-  const address = await connect();
-  if (!address) return;
-  wallet.value = address;
-}
-
+import { useAccount, useDisconnect, useWriteContract } from "@wagmi/vue";
+import { Logo, ModalConnect } from "./components";
+import { abi, contract } from "./contracts/Token";
+const { isConnected } = useAccount();
+const { disconnect } = useDisconnect();
+const { writeContract } = useWriteContract();
 async function faucet() {
-  const token = new Token();
-  await token.faucet();
+  writeContract({
+    abi: abi,
+    address: contract,
+    functionName: "mint",
+    args: [2000n],
+  });
 }
 </script>
 <!-- prettier-ignore -->
 <template>
   <main class="l-main">
     <header class="l-header u-flex-line u-flex-line-center">
-      <a class="l-header__logo" href="https://sograph.app/#/">
-        <logo/>
-      </a>
+      <a class="l-header__logo" href="https://sograph.app/#/"><logo/></a>
       <nav class="l-header__nav u-flex-line">
-        <a class="l-header__nav-item" href="#">Faucet</a>
-        <a class="l-header__nav-item" href="https://vote.sograph.app/#/">Vote</a>
-        <a class="l-header__nav-item c-soon" href="#">Docs</a>
+        <a class="l-header__nav-item" target="_blank" href="https://sograph.app/#/">App</a>
+        <a class="l-header__nav-item" target="_blank" href="https://vote.sograph.app/#/">Vote</a>
+        <a class="l-header__nav-item" target="_blank" href="https://docs.sograph.app/#/">Docs</a>
       </nav>
-      <button type="button" class="c-chain u-flex-line-center"><span></span>BNBChain Testnet</button>
+      <button type="button" class="c-chain u-flex-line-center"><span></span>Base Sepolia</button>
+      <button v-if="isConnected" @click="disconnect()" type="button" class="l-header__button">Disconnect</button>
     </header>
     <div class="l-main__content u-flex-line-center">
-      <button v-if="!wallet" @click="handleConnect" class="c-button">Connect</button>
+      <modal-connect v-if="!isConnected"/>
       <button v-else @click="faucet" class="c-button">Claim 2000 Graph</button>
     </div>
   </main>

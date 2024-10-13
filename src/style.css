@@ -91,6 +91,21 @@ body {
 .u-flex-line-center {
   justify-content: center;
 }
+.c-icon,
+.c-icon--small {
+  color: var(--color-icon-primary);
+}
+.c-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+.c-icon--small {
+  height: 2rem;
+  width: 2rem;
+}
+.c-icon--fill-none {
+  fill: none;
+}
 .l-header {
   height: 100px;
   gap: 40px;
@@ -104,6 +119,15 @@ body {
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
+}
+.l-header__button {
+  color: var(--text-color-quinary);
+  background-color: var(--bg-color-quaternary);
+  height: 48px;
+  border-radius: 12px;
+  padding-inline: 24px;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 .l-main {
   height: 100vh;
@@ -123,8 +147,6 @@ body {
   margin-block: auto;
   font-size: 1.6rem;
   font-weight: 600;
-  /* color: var(--text-color-quinary);
-  background-color: var(--bg-color-quaternary); */
   border: 1px solid var(--bg-color-tertiary);
 }
 .c-chain {

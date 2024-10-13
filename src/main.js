@@ -1,8 +1,12 @@
 import { createApp } from "vue";
-import "./style.css";
+import { WagmiPlugin } from "@wagmi/vue";
+import { QueryClient, VueQueryPlugin } from "@tanstack/vue-query";
+import { config } from "./wagmi.js";
 import App from "./App.vue";
-import Token from "./infra/token.js";
+import "./style.css";
 
-const token = new Token();
-token.init(window);
-createApp(App).mount("#app");
+const queryClient = new QueryClient();
+const app = createApp(App);
+app.use(WagmiPlugin, { config });
+app.use(VueQueryPlugin, { queryClient });
+app.mount("#app");
