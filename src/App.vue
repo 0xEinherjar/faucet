@@ -24,7 +24,7 @@ async function faucet() {
         <a class="l-header__nav-item" target="_blank" href="https://vote.sograph.app/#/">Vote</a>
         <a class="l-header__nav-item" target="_blank" href="https://docs.sograph.app/#/">Docs</a>
       </nav>
-      <button type="button" class="c-chain u-flex-line-center"><span></span>Base Sepolia</button>
+      <button type="button" class="c-chain u-flex-line-center"><span></span>Bsc Testnet</button>
       <button v-if="isConnected" @click="disconnect()" type="button" class="l-header__button">Disconnect</button>
     </header>
     <div class="l-main__content u-flex-line-center">
